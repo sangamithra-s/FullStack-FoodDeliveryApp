@@ -1,0 +1,33 @@
+.explore-menu-list::-webkit-scrollbar {
+  display: None;
+}
+.explore-menu-list-item img {
+  cursor: pointer;
+}
+.explore-menu-list-item img:active {
+  border: 5px solid tomato;
+  padding: 2px;
+}
+.explore-menu-list-item p {
+  color: rosybrown;
+  cursor: pointer;
+}
+
+.scroll-icon {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.scroll-icon:hover {
+  background-color: #7a4a4a;
+}
+
+.explore-menu hr {
+  margin: 10px 0px;
+  height: 2px;
+  background-color: #e2e2e2;
+  border: none;
+}
