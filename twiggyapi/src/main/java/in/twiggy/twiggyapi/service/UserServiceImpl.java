@@ -7,6 +7,8 @@ import in.twiggy.twiggyapi.io.UserResponse;
 import in.twiggy.twiggyapi.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +17,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -28,7 +33,7 @@ public class UserServiceImpl implements UserService {
     private UserEntity convertToEntity(UserRequest request){
             return UserEntity.builder()
                     .email(request.getEmail())
-                    .password(request.getPassword())
+                    .password(passwordEncoder.encode(request.getPassword()))
                     .name(request.getName())
                     .build();
     }
