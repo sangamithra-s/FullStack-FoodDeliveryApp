@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { assets } from "../../../assets/assets";
 import axios from "axios";
 import { addFood } from "../../../services/foodService";
-import { Toast } from "bootstrap/dist/js/bootstrap.bundle.min";
+
 import { toast } from "react-toastify";
 
 function AddFoods() {

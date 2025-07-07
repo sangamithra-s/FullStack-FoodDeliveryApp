@@ -6,4 +6,6 @@ import in.twiggy.twiggyapi.io.UserResponse;
 public interface UserService {
 
     UserResponse regiserUser(UserRequest request);
+
+    String FindByUserId();
 }

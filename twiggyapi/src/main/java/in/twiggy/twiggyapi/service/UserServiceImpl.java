@@ -21,6 +21,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    AuthenticationFacade authenicationFacade;
+
 
     @Override
     public UserResponse regiserUser(UserRequest request) {
@@ -28,6 +31,13 @@ public class UserServiceImpl implements UserService {
        newUser=userRepository.save(newUser);
        UserResponse userResponse=convertToResponse(newUser);
        return userResponse;
+    }
+
+    @Override
+    public String FindByUserId() {
+        String userEmail = authenicationFacade.getAuthentication().getName();
+        UserEntity userEntity = userRepository.findByEmail(userEmail).orElseThrow(() -> new RuntimeException("User not found"));
+        return userEntity.getId();
     }
 
     private UserEntity convertToEntity(UserRequest request){

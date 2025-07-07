@@ -1,7 +1,41 @@
 import React from "react";
-import "./Register.css"; // Assuming you have a CSS file for styling
+import "./Register.css";
+import axios from "axios";
+import { toast } from "react-toastify"; // Assuming you have a CSS file for styling
+import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom if needed
 
 function Register() {
+  const navigate = useNavigate(); // Import useNavigate from react-router-dom if needed
+  const [data, setData] = React.useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/users/register",
+        data
+      );
+      console.log("Registration successful:", response.data);
+      if (response.status === 200) {
+        toast.success("Registration successful");
+        navigate("/login"); // Redirect to login page after successful registration
+      } else {
+        toast.error("Registration failed");
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+    }
+  };
   return (
     <body>
       <div className="register-container">
@@ -12,13 +46,15 @@ function Register() {
                 <h5 className="card-title text-center mb-5 fw-light fs-5">
                   Sign In
                 </h5>
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="form-floating mb-3">
                     <input
                       type="text"
                       className="form-control"
                       id="floatingInput"
                       placeholder="Full Name"
+                      onChange={handleChange}
+                      name="name"
                     />
                     <label htmlFor="floatingInput">Full Name</label>
                   </div>
@@ -28,6 +64,8 @@ function Register() {
                       className="form-control"
                       id="floatingInput"
                       placeholder="name@example.com"
+                      onChange={handleChange}
+                      name="email"
                     />
                     <label htmlFor="floatingInput">Email address</label>
                   </div>
@@ -37,6 +75,8 @@ function Register() {
                       className="form-control"
                       id="floatingPassword"
                       placeholder="Password"
+                      onChange={handleChange}
+                      name="password"
                     />
                     <label htmlFor="floatingPassword">Password</label>
                   </div>

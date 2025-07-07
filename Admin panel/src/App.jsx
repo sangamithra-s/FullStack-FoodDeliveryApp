@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ListFoods from "./components/pages/listFoods/listFoods";
 import Orders from "./components/pages/Orders/orders";
-import AddFoods from "./components/pages/addFoods/addFoods";
+import AddFoods from "./components/pages/addFoods/AddFoods";
 import Sidebar from "./components/sidebar/sidebar";
 import Menubar from "./components/Menubar/Menubar";
 import { ToastContainer } from "react-toastify";

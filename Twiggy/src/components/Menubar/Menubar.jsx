@@ -6,7 +6,13 @@ import { StoreContext } from "../../context/StoreContext";
 
 function Menubar() {
   const [active, setActive] = React.useState("Home");
-  const { quantity } = React.useContext(StoreContext);
+  const { quantity, token, setToken, setQuantity } =
+    React.useContext(StoreContext);
+  const logout = () => {
+    setToken("");
+    localStorage.removeItem("token");
+    setQuantity({});
+  };
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container">
@@ -67,6 +73,24 @@ function Menubar() {
               </Link>
             </li>
           </ul>
+          {!token ? (
+            <>
+              <Link to="/login">
+                <button className="btn btn-outline-success mx-1">Login</button>
+              </Link>
+              <Link to="/register">
+                <button className="btn btn-outline-primary mx-1">
+                  Register
+                </button>
+              </Link>
+            </>
+          ) : (
+            <div className="dropdown text-end">
+              <Link to="/" className="btn btn-danger ms-3" onClick={logout}>
+                Logout
+              </Link>
+            </div>
+          )}
           <div className="d-flex align-items-center gap-4">
             <div className="position-relative">
               <Link to="/cart">
@@ -76,12 +100,6 @@ function Menubar() {
                 </span>
               </Link>
             </div>
-            <Link to="/login">
-              <button className="btn btn-outline-success">Login</button>
-            </Link>
-            <Link to="/register">
-              <button className="btn btn-outline-primary">Register</button>
-            </Link>
           </div>
         </div>
       </div>
